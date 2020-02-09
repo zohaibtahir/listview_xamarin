@@ -7,7 +7,7 @@
              x:Class="listview.MainPage">
 
     <StackLayout>
-        <ListView x:Name="list" HasUnevenRows="True" ItemSelected="list_ItemSelected" ItemTapped="list_ItemTapped">
+        <ListView x:Name="list" HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -20,7 +20,10 @@
                             </StackLayout>
                             <Button Text="Follow"/>
                         </StackLayout>
-                      
+                        <ViewCell.ContextActions>
+                            <MenuItem Text="Call" Clicked="MenuItem_Clicked" CommandParameter="{Binding .}"/>
+                            <MenuItem Text="Delete" Clicked="MenuItem_Clicked_1" IsDestructive="True" CommandParameter="{Binding .}"/>
+                        </ViewCell.ContextActions>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

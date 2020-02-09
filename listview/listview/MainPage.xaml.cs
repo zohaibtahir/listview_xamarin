@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using listview.Models;
+using System.Collections.ObjectModel;
 
 namespace listview
 {
@@ -14,28 +15,32 @@ namespace listview
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        private ObservableCollection<Contact> contacts;
         public MainPage()
         {
             InitializeComponent();
-            list.ItemsSource = new List<Contact>
+            
+           contacts= new ObservableCollection<Contact>
             {
                 new Contact{name="Saim",status="Hello I am their",imageUrl="http://lorempixel.com/100/100/people/1"},
                 new Contact{name="Naveed",status="Bussy",imageUrl="http://lorempixel.com/100/100/people/2"},
                 new Contact{name="Furqan",status="Active",imageUrl="http://lorempixel.com/100/100/people/3"},
                 new Contact{name="Muneeb",status="School",imageUrl="http://lorempixel.com/100/100/people/4"}  
             };
+            list.ItemsSource = contacts;
         }
 
-        private void list_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private void MenuItem_Clicked(object sender, EventArgs e)
         {
-            var contact = e.SelectedItem as Contact;
-            DisplayAlert("Selected", contact.name, "ok");
+            var menuitem = sender as MenuItem;
+            var contact = menuitem.CommandParameter as Contact;
+            DisplayAlert("Call", contact.name, "Ok");
         }
 
-        private void list_ItemTapped(object sender, ItemTappedEventArgs e)
+        private void MenuItem_Clicked_1(object sender, EventArgs e)
         {
-            var contact = e.Item as Contact;
-            DisplayAlert("Tapped", contact.name, "Ok");
+            var contact = (sender as MenuItem).CommandParameter as Contact;
+            contacts.Remove(contact);
         }
     }
 }
