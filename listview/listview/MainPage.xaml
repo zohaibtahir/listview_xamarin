@@ -7,7 +7,8 @@
              x:Class="listview.MainPage">
 
     <StackLayout>
-        <ListView x:Name="list" HasUnevenRows="True">
+        <SearchBar Placeholder="Search..." TextChanged="SearchBar_TextChanged"/>
+        <ListView x:Name="list" HasUnevenRows="True" IsPullToRefreshEnabled="True" Refreshing="list_Refreshing">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

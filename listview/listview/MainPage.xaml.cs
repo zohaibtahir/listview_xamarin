@@ -16,18 +16,41 @@ namespace listview
     public partial class MainPage : ContentPage
     {
         private ObservableCollection<Contact> contacts;
+        private IEnumerable<Contact> ss;
         public MainPage()
         {
             InitializeComponent();
-            
-           contacts= new ObservableCollection<Contact>
+
+            contacts = getContact();
+            list.ItemsSource = contacts;
+        }
+        ObservableCollection<Contact> getContact()
+        {
+            var myContact = new ObservableCollection<Contact>
             {
                 new Contact{name="Saim",status="Hello I am their",imageUrl="http://lorempixel.com/100/100/people/1"},
                 new Contact{name="Naveed",status="Bussy",imageUrl="http://lorempixel.com/100/100/people/2"},
                 new Contact{name="Furqan",status="Active",imageUrl="http://lorempixel.com/100/100/people/3"},
-                new Contact{name="Muneeb",status="School",imageUrl="http://lorempixel.com/100/100/people/4"}  
+                new Contact{name="Muneeb",status="School",imageUrl="http://lorempixel.com/100/100/people/4"}
             };
-            list.ItemsSource = contacts;
+            
+             return myContact;
+            
+        }
+        IEnumerable<Contact> getsearch(string searchtext = null)
+        {
+            var searchlist = new List<Contact>
+            {
+                new Contact{name="Saim",status="Hello I am their",imageUrl="http://lorempixel.com/100/100/people/1"},
+                new Contact{name="Naveed",status="Bussy",imageUrl="http://lorempixel.com/100/100/people/2"},
+                new Contact{name="Furqan",status="Active",imageUrl="http://lorempixel.com/100/100/people/3"},
+                new Contact{name="Muneeb",status="School",imageUrl="http://lorempixel.com/100/100/people/4"}
+            };
+            if (string.IsNullOrWhiteSpace(searchtext))
+            {
+                return searchlist;
+            }
+            return searchlist.Where(c => c.name.StartsWith(searchtext));
         }
 
         private void MenuItem_Clicked(object sender, EventArgs e)
@@ -41,6 +64,19 @@ namespace listview
         {
             var contact = (sender as MenuItem).CommandParameter as Contact;
             contacts.Remove(contact);
+        }
+
+        private void list_Refreshing(object sender, EventArgs e)
+        {
+            contacts = getContact();
+            list.ItemsSource = contacts;
+            list.EndRefresh();
+        }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ss= getsearch(e.NewTextValue);
+            list.ItemsSource = ss;
         }
     }
 }
