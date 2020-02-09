@@ -25,5 +25,17 @@ namespace listview
                 new Contact{name="Muneeb",status="School",imageUrl="http://lorempixel.com/100/100/people/4"}  
             };
         }
+
+        private void list_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var contact = e.SelectedItem as Contact;
+            DisplayAlert("Selected", contact.name, "ok");
+        }
+
+        private void list_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var contact = e.Item as Contact;
+            DisplayAlert("Tapped", contact.name, "Ok");
+        }
     }
 }

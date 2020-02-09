@@ -7,7 +7,7 @@
              x:Class="listview.MainPage">
 
     <StackLayout>
-        <ListView x:Name="list" HasUnevenRows="True">
+        <ListView x:Name="list" HasUnevenRows="True" ItemSelected="list_ItemSelected" ItemTapped="list_ItemTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
