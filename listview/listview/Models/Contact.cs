@@ -4,7 +4,7 @@ using System.Text;
 
 namespace listview.Models
 {
-    class Contact
+    public class Contact
     {
         public string name { get; set; }
         public string status { get; set; }

@@ -78,5 +78,16 @@ namespace listview
             ss= getsearch(e.NewTextValue);
             list.ItemsSource = ss;
         }
+
+       async private void list_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem==null)
+            {
+                return;
+            }
+            var contact = e.SelectedItem as Contact;
+            await Navigation.PushAsync(new DetailPage(contact));
+            list.SelectedItem = null;
+        } 
     }
 }

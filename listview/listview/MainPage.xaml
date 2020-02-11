@@ -4,16 +4,17 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             BackgroundColor="White"
              x:Class="listview.MainPage">
 
     <StackLayout>
-        <SearchBar Placeholder="Search..." TextChanged="SearchBar_TextChanged"/>
-        <ListView x:Name="list" HasUnevenRows="True" IsPullToRefreshEnabled="True" Refreshing="list_Refreshing">
+        <SearchBar Placeholder="Search..." TextChanged="SearchBar_TextChanged" />
+        <ListView x:Name="list" HasUnevenRows="True" IsPullToRefreshEnabled="True" Refreshing="list_Refreshing" ItemSelected="list_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Orientation="Horizontal" Padding="5">
-                            
+             
                                 <Image x:Name="img" Source="{Binding imageUrl}"/>
                             <StackLayout HorizontalOptions="StartAndExpand">
                                 <Label Text="{Binding name}" TextColor="Black"/>
